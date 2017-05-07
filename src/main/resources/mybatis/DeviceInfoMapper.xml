@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunqianwen.datacenter.mapper.DeviceInfoMapper">
+
+  <sql id="Base_Column_List" >
+      id,device_id,device_name,device_type,temperature,humidity,intensity,write_time,create_date
+  </sql>
+
+  <resultMap id="BaseResultMap" type="com.sunqianwen.datacenter.model.DeviceInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="humidity" property="humidity" jdbcType="VARCHAR" />
+    <result column="intensity" property="intensity" jdbcType="VARCHAR" />
+    <result column="write_time" property="writeTime" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+ 
+  <select id="listDeviceInfos" parameterType="com.sunqianwen.datacenter.dto.DeviceInfoQueryDTO" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      device_info
+    <where>
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="startDate != null">
+            AND create_date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND create_date &lt; #{endDate}
+        </if>
+    </where>
+    ORDER BY create_date DESC
+  </select>
+
+  <insert id="insert" parameterType="com.sunqianwen.datacenter.model.DeviceInfo">
+    insert into
+          device_info (deviceId,deviceName,deviceType,temperature,humidity,intensity,writeTime,createDate)
+    values
+          (#{deviceId,jdbcType=VARCHAR},
+          #{deviceName,jdbcType=INTEGER},
+          #{deviceType,jdbcType=INTEGER},
+          #{temperature,jdbcType=INTEGER},
+          #{humidity,jdbcType=INTEGER},
+          #{intensity,jdbcType=INTEGER},
+          #{writeTime,jdbcType=TIMESTAMP},
+          #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+ 
+</mapper>

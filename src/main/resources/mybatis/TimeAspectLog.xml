@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunqianwen.datacenter.mapper.TimeAspectLogMapper">
+
+    <insert id="insert" parameterType="com.sunqianwen.datacenter.model.TimeAspectLog" >
+        insert into
+          time_aspect_log (tag, used_times,create_date)
+        values
+          (#{tag,jdbcType=VARCHAR},#{usedTimes,jdbcType=INTEGER},#{createDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="listTimeAspectLogs" resultType="com.sunqianwen.datacenter.model.TimeAspectLog">
+        SELECT id,tag, used_times usedTimes,create_date createDate FROM time_aspect_log ORDER BY create_date DESC
+    </select>
+
+</mapper>
