@@ -20,8 +20,7 @@ public class DeviceInfoReceive {
     @Autowired
     private DeviceInfoMapper deviceInfoMapper;
 
-    //todo 修改topic
-    @RabbitListener(queues="topic.deviceEventMessage")    //监听器监听指定的Queue
+    @RabbitListener(queues="topic.deviceInfoMessage")    //监听器监听指定的Queue
     public void process(String str) {
         try{
             DeviceInfo deviceInfo = JSON.parseObject(str, DeviceInfo.class);
