@@ -10,6 +10,9 @@
     mvn -U clean install   -Dmaven.test.skip=true -am
 ````
 
+* jar下载
+[datacenter-1.0-SNAPSHOT.jar](https://github.com/moxingwang/datacenter/blob/master/src/main/resources/target/datacenter-1.0-SNAPSHOT.jar)
+
 ## 需求
 ````
 实现rest风格的web Service
